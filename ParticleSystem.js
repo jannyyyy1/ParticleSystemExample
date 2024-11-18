@@ -23,7 +23,7 @@ class ParticleSystem {
         strokeWeight(0.1);
         stroke(250, 200);
         let d = p5.Vector.dist(sp.position, ep.position);
-        let off = map(mouseY, 0, height, 5, 300);
+        let off = map(mouseY, 0, height, 5, 100);
         if (d < off) {
             line(sp.position.x, sp.position.y, ep.position.x, ep.position.y)
         }
