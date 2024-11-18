@@ -1,11 +1,22 @@
 class ParticleSystem {
     constructor(position) {
-        this.origin = position.copy();
+        this.pos = position.copy();
+        this.vel = createVector(0, 2);
         this.particles = [];
     }
 
+    move() {
+        this.pos.add(this.vel);
+    }
+
+    show() {
+        noStroke();
+        fill(230, 50, 50);
+        circle(this.pos.x, this.pos.y, 5);
+    }
+
     addParticle() {
-        this.particles.push(new Particle(this.origin));
+        this.particles.push(new Particle(this.pos));
     }
 
     applyGravity(g) {

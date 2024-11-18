@@ -14,10 +14,20 @@ function setup() {
 function draw() {
   background(51);
 
+  stroke(200);
+  line(0, 300, width, 300);
+
   for (let s of systems) {
-    s.addParticle();
+    // s.move();
+    if (s.pos.y < 300) {
+      s.move();
+    } else {
+      s.addParticle();
+    }
+    
     s.applyGravity(g);
     s.applyForce(wind);
+    s.show();
     s.run();
   }
 }
