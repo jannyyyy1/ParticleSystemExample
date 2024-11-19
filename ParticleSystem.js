@@ -5,7 +5,12 @@ class ParticleSystem {
     }
 
     addParticle() {
-        this.particles.push(new Particle(this.origin));
+        let p = random();
+        if (p < 0.9) {
+            this.particles.push(new Particle(this.origin));
+        } else {
+            this.particles.push(new Recticle(this.origin));
+        }
     }
 
     applyGravity(g) {
