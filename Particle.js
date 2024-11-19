@@ -6,6 +6,7 @@ class Particle {
         this.velocity = createVector(random(-1, 1), random(-1, 0));
         this.position = position.copy();
         this.lifespan = 255;
+        this.agingRate = 2;
         this.w = 2;
     }
 
@@ -21,7 +22,7 @@ class Particle {
     update() {
         this.velocity.add(this.acceleration);
         this.position.add(this.velocity);
-        this.lifespan -= 2;
+        this.lifespan -= this.agingRate;
 
         this.acceleration.set(0, 0);
     }

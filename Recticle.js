@@ -1,6 +1,7 @@
 class Recticle extends Particle {
     constructor(position) {
         super(position);
+        this.agingRate = 4;
     }
 
     display() {
