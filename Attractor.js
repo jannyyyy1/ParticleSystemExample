@@ -1,4 +1,4 @@
-class Repeller {
+class Attractor {
 
     constructor(x, y)  {
       this.position = createVector(x, y);
@@ -14,7 +14,7 @@ class Repeller {
         distance = constrain(distance, 5, 50);
     
         // Step 3: Calculate the magnitude, using a power variable for G.
-        let strength = -1 * this.power / (distance * distance);
+        let strength = this.power / (distance * distance);
     
         // Step 4: Make a vector out of the direction and magnitude.
         force.setMag(strength);
@@ -27,7 +27,7 @@ class Repeller {
   
     show() {
       stroke(0);
-      fill(127);
+      fill(250, 100, 100);
       circle(this.position.x, this.position.y, 32);
     }
   }

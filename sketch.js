@@ -1,5 +1,6 @@
 let systems = [];
 let repeller;
+let att;
 
 let g; // gravity
 let wind;
@@ -9,7 +10,8 @@ function setup() {
   g = createVector(0, 0.05);
   wind = createVector(0.03, -0.01);
 
-  repeller = new Repeller(width / 2 - 20, height / 2);
+  repeller = new Repeller(0, height / 2);
+  att = new Attractor(width, height / 2);
 }
 
 function draw() {
@@ -18,12 +20,18 @@ function draw() {
   for (let s of systems) {
     s.addParticle();
     s.applyGravity(g);
-    s.applyForce(wind);
+    // s.applyForce(wind);
     s.applyRepeller(repeller);
+    s.applyRepeller(att);
     s.run();
   }
 
+
+  repeller.move(createVector(1, 0));
   repeller.show();
+
+  att.move(createVector(-1, 0));
+  att.show();
 
 }
 
