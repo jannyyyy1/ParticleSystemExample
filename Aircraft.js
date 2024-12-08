@@ -3,6 +3,7 @@ class Aircraft {
     constructor() {
       this.position = createVector(width / 2, height - 50);
       this.target = createVector(width / 2, height - 50);
+      this.target = null;
       this.speed = 5;
       this.forceRadius = 150; // 힘의 범위
       this.forceMagnitude = 100; // 힘의 크기
