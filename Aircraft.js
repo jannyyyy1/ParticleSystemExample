@@ -4,11 +4,25 @@ class Aircraft {
       this.position = createVector(width / 2, height - 50);
       this.target = createVector(width / 2, height - 50);
       this.speed = 5;
+      this.forceRadius = 150; // 힘의 범위
+      this.forceMagnitude = 100; // 힘의 크기
     }
   
     setTarget(target) {
-      this.target = target;
+      this.target = target.copy();
     }
+
+
+  generateForce(targetOrigin) {
+    // 비행기가 파티클 시스템 중심에 미치는 힘
+    let distance = p5.Vector.dist(this.position, targetOrigin);
+    if (distance < this.forceRadius) {
+      let force = p5.Vector.sub(targetOrigin, this.position);
+      force.setMag(-this.forceMagnitude / (distance + 1)); // 거리 감소 효과
+      return force;
+    }
+    return createVector(0, 0);
+  }
   
     update() {
       let direction = p5.Vector.sub(this.target, this.position);
