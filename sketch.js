@@ -26,4 +26,5 @@ function mouseClicked() {
   let mPos = createVector(mouseX, mouseY);
   let system = new ParticleSystem(mPos);
   systems.push(system);
+  aircraft.setTarget(mPos); // 비행기 목표 위치 설정
 }
