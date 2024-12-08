@@ -18,8 +18,12 @@ function draw() {
     s.addParticle();
     s.applyGravity(g);
     s.applyForce(wind);
+    s.applyAircraftForce(aircraft.position); // 비행기 영향받는 파티클
     s.run();
   }
+
+  aircraft.update();
+  aircraft.display();
 }
 
 function mouseClicked() {
