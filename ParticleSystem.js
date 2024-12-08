@@ -1,8 +1,8 @@
 class ParticleSystem {
-    constructor(position) {
-        this.origin = position.copy();
+    constructor(origin) {
+        this.origin = origin.copy();
         this.particles = [];
-        this.baseOrigin = origin.copy();
+        this.baseOrigin = origin.copy(); //복원 위치
     }
 
     applyForce(force) {
@@ -13,16 +13,8 @@ class ParticleSystem {
         let toBase = p5.Vector.sub(this.baseOrigin, this.origin).mult(0.05);
         this.origin.add(toBase);
 
-        for (let p of this.particles) {
-            p.applyForce(force);
-        }
-    }
-
-    applyAircraftForce(aircraftPos) {
-        let force = p5.vector.sub(aircraftPos, this.origin);
-        force.setMag(0.05); //힘크기 조절
-        for (let p of this.particles){
-            p.applyForce(force);
+        for (let particle of this.particles) {
+            particle.applyForce(force);
         }
     }
 
