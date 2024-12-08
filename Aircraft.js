@@ -24,11 +24,18 @@ class Aircraft {
     return createVector(0, 0);
   }
   
-    update() {
+     update() {
+     if (this.target) {
       let direction = p5.Vector.sub(this.target, this.position);
-      direction.setMag(this.speed);
-      this.position.add(direction);
+      if (direction.mag() < this.speed) {
+        this.position = this.target.copy();
+        this.target = null;
+      } else {
+        direction.setMag(this.speed);
+        this.position.add(direction);
+      }
     }
+  }
   
     display() {
       fill(255, 0, 0);
