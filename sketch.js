@@ -1,14 +1,14 @@
-let system;
-let systems = [];
-
-let g; // gravity
-let wind;
+let particleSystems = [];
+let aircraft;
 
 function setup() {
-  createCanvas(720, 400);
-  // system = new ParticleSystem(createVector(width / 2, 50));
-  g = createVector(0, 0.05);
-  wind = createVector(0.03, -0.01);
+  createCanvas(800, 600);
+  for (let i = 0; i < 4; i++) {
+    // 태풍 파티클 시스템 초기화
+    let x = random(200, width - 200);
+    let y = random(200, height - 200);
+    particleSystems.push(new ParticleSystem(createVector(x, y)));
+  }
 
   aircraft = new Aircraft();
 }
@@ -16,16 +16,14 @@ function setup() {
 function draw() {
   background(51);
 
-  for (let s of systems) {
-    s.addParticle();
-    s.applyGravity(g);
-    s.applyForce(wind);
-    s.applyAircraftForce(aircraft.position); // 비행기 영향받는 파티클
-    s.run();
-  }
-
   aircraft.update();
   aircraft.display();
+
+  for (let ps of particleSystems) {
+    ps.applyForce(aircraft.generateForce(ps.origin)); // 비행기 힘 적용
+    ps.update();
+    ps.display();
+  }
 }
 
 function mouseClicked() {
