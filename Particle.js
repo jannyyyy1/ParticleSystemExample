@@ -3,15 +3,9 @@
 class Particle {
     constructor(position) {
         this.acceleration = createVector(0, 0);
-        this.velocity = createVector(random(-1, 1), random(-1, 0));
+        this.velocity = p5.Vector.random2D().mult(random(0.5, 2));
         this.position = position.copy();
         this.lifespan = 255;
-        this.w = 2;
-    }
-
-    run() {
-        this.update();
-        this.display();
     }
 
     applyForce(force) {
@@ -26,11 +20,10 @@ class Particle {
     }
 
     display() {
-        stroke(200, this.lifespan);
-        strokeWeight(2);
-        fill(127, this.lifespan);
-        ellipse(this.position.x, this.position.y, this.w, this.w);
-    }
+        noStroke();
+        fill(150, this.lifespan);
+        ellipse(this.position.x, this.position.y, 4);
+      }
 
     isDead() {
         return this.lifespan < 0;
