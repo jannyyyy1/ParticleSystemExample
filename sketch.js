@@ -26,9 +26,7 @@ function draw() {
   }
 }
 
-function mouseClicked() {
-  let mPos = createVector(mouseX, mouseY);
-  let system = new ParticleSystem(mPos);
-  systems.push(system);
-  aircraft.setTarget(mPos); // 비행기 목표 위치 설정
+function mousePressed() {
+  // 마우스 클릭 시 비행기 이동
+  aircraft.setTarget(createVector(mouseX, mouseY));
 }

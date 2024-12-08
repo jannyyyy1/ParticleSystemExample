@@ -2,17 +2,17 @@ class ParticleSystem {
     constructor(position) {
         this.origin = position.copy();
         this.particles = [];
-    }
-
-    addParticle() {
-        this.particles.push(new Particle(this.origin));
-    }
-
-    applyGravity(g) {
-        this.applyForce(g);
+        this.baseOrigin = origin.copy();
     }
 
     applyForce(force) {
+        // 중심에 힘 적용
+        this.origin.add(force);
+
+        // 중심 복원력 적용
+        let toBase = p5.Vector.sub(this.baseOrigin, this.origin).mult(0.05);
+        this.origin.add(toBase);
+
         for (let p of this.particles) {
             p.applyForce(force);
         }
@@ -26,13 +26,20 @@ class ParticleSystem {
         }
     }
 
-    run() {
-        for (let i = this.particles.length-1; i >= 0; i--) {
-            let p = this.particles[i];
-            p.run();
-            if (p.isDead()) {
-              this.particles.splice(i, 1);
-            }
+    update() {
+        // 새로운 입자 생성
+        this.particles.push(new Particle(this.origin));
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          this.particles[i].update();
+          if (this.particles[i].isDead()) {
+            this.particles.splice(i, 1);
           }
+        }
+      }
+    
+      display() {
+        for (let particle of this.particles) {
+          particle.display();
+        }
+      }
     }
-}
